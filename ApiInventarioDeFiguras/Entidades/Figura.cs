@@ -6,6 +6,8 @@
 
         public string Name { get; set; }
 
-        public string Marca { get; set; }
+        public string Franquicia { get; set; }
+
+        public virtual List <Wave> Marca { get; set; }
     }
 }
