@@ -4,6 +4,7 @@ namespace ApiInventarioDeFiguras.Entidades
 {
     public class Figura
     {
+        [Key]
         public int Id { get; set; }
 
         public string Name { get; set; }
