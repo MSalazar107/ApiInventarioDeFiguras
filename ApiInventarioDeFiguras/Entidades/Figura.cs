@@ -20,7 +20,6 @@ namespace ApiInventarioDeFiguras.Entidades
         public int Id { get; set; }
         public int Ola { get; set; }
         public string Marca { get; set; }
-        public virtual Figura Figura { get; set; }
 
     }
 }
