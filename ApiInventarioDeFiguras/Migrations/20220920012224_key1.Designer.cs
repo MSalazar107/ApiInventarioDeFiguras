@@ -3,6 +3,7 @@ using ApiInventarioDeFiguras;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiInventarioDeFiguras.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220920012224_key1")]
+    partial class key1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,11 +46,11 @@ namespace ApiInventarioDeFiguras.Migrations
 
             modelBuilder.Entity("ApiInventarioDeFiguras.Entidades.Wave", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Numero_de_Serie")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Numero_de_Serie"), 1L, 1);
 
                     b.Property<int>("FiguraId")
                         .HasColumnType("int");
@@ -60,7 +62,7 @@ namespace ApiInventarioDeFiguras.Migrations
                     b.Property<int>("Ola")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("Numero_de_Serie");
 
                     b.HasIndex("FiguraId");
 

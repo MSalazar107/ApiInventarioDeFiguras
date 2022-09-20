@@ -14,14 +14,14 @@ namespace ApiInventarioDeFiguras.Controllers
             this.dbContext = dbContext;
         }
         [HttpGet]
-        public async Task<ActionResult<List<Figura>>> Get()
+        public async Task<ActionResult<List<Wave>>> Get()
         {
-            return await dbContext.Figuras.ToListAsync();
+            return await dbContext.Waves.ToListAsync();
         }
 
         [HttpPost]
 
-        public async Task<ActionResult> Post(Figura figura)
+        public async Task<ActionResult> Post(Wave figura)
         {
             dbContext.Add(figura);
             await dbContext.SaveChangesAsync();
@@ -29,14 +29,14 @@ namespace ApiInventarioDeFiguras.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<ActionResult> Put(Figura figura, int id)
+        public async Task<ActionResult> Put(Wave wave, int id)
         {
-            if (figura.Id != id)
+            if (wave.Id != id)
             {
                 return BadRequest("El id de la figura no coincide con el establecido en la url.");
             }
 
-            dbContext.Update(figura);
+            dbContext.Update(wave);
             await dbContext.SaveChangesAsync();
             return Ok();
         }
@@ -44,8 +44,8 @@ namespace ApiInventarioDeFiguras.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var figuraDel = await dbContext.Figuras.FindAsync(id);
-            dbContext.Figuras.Remove(figuraDel);
+            var waveDel = await dbContext.Figuras.FindAsync(id);
+            dbContext.Figuras.Remove(waveDel);
             await dbContext.SaveChangesAsync();
             return Ok();
         }
