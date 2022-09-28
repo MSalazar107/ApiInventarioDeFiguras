@@ -6,12 +6,13 @@ namespace ApiInventarioDeFiguras.Entidades
     {
         [Key]
         public int Id { get; set; }
-
+        [Required (ErrorMessage="Se requiere nombre de la figura ")]
+        [StringLength(40, MinimumLength = 3)]
         public string Name { get; set; }
 
         public string Franquicia { get; set; }
 
-        public virtual List <Wave> Numero_de_Serie { get; set; }
+        public virtual List <Wave> Wave { get; set; }
     }
 
     public class Wave

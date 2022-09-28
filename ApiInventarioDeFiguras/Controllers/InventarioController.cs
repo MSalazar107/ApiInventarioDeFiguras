@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 namespace ApiInventarioDeFiguras.Controllers
 {
     [ApiController]
-    [Route("/figuras")]
+    [Route("figuras")]
     public class InventarioController: ControllerBase
     {
-        private readonly ApplicationDbContext dbContext;
+        private ApplicationDbContext dbContext;
         public InventarioController(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
@@ -16,7 +16,14 @@ namespace ApiInventarioDeFiguras.Controllers
         [HttpGet]
         public async Task <ActionResult<List<Figura>>> Get()
         {
-            return await dbContext.Figuras.Include(x => x.Numero_de_Serie).ToListAsync();
+            return await dbContext.Figuras.Include(x => x.Wave).ToListAsync();
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Figura>> GetById(int id)
+        {
+            return await dbContext.Figuras.FirstOrDefaultAsync(x => x.Id == id);
+           
         }
 
         [HttpPost]
