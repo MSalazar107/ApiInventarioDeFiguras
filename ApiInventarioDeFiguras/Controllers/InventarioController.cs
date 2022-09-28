@@ -16,7 +16,7 @@ namespace ApiInventarioDeFiguras.Controllers
         [HttpGet]
         public async Task <ActionResult<List<Figura>>> Get()
         {
-            return await dbContext.Figuras.ToListAsync();
+            return await dbContext.Figuras.Include(x => x.Numero_de_Serie).ToListAsync();
         }
 
         [HttpPost]

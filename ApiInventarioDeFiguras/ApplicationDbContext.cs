@@ -12,6 +12,7 @@ namespace ApiInventarioDeFiguras
         
         public DbSet<Figura> Figuras { get; set; }
         public DbSet<Wave> Waves { get; set; }
+        
     }
     
 
