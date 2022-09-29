@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ApiInventarioDeFiguras.Controllers
 {
     [ApiController]
-    [Route("figuras")]
+    [Route("inventario")]
     public class InventarioController: ControllerBase
     {
         private ApplicationDbContext dbContext;
@@ -22,8 +22,30 @@ namespace ApiInventarioDeFiguras.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Figura>> GetById(int id)
         {
-            return await dbContext.Figuras.FirstOrDefaultAsync(x => x.Id == id);
+            
+            var figura = await dbContext.Figuras.Include(x => x.Wave).FirstOrDefaultAsync(x => x.Id == id); ;
+            
+            return figura;
            
+        }
+
+        [HttpGet("{name}")]
+
+        public async Task <ActionResult<Figura>> Get(string name)
+        {
+
+            var figura = await dbContext.Figuras.Include(x => x.Wave).FirstOrDefaultAsync(x => x.Name.Contains(name));
+            
+            return figura;
+        }
+
+        [HttpGet("{id:int}/{name}")]
+        public async Task<ActionResult<Figura>> Get(int id, string name)
+        
+        {
+            var figura = await dbContext.Figuras.Include(x => x.Wave).FirstOrDefaultAsync(x => x.Id == id);
+
+            return figura;
         }
 
         [HttpPost]
@@ -47,12 +69,14 @@ namespace ApiInventarioDeFiguras.Controllers
             await dbContext.SaveChangesAsync();
             return Ok();
         }
+
+        
         
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var figuraDel = await dbContext.Figuras.FindAsync(id);
-            dbContext.Figuras.Remove(figuraDel);
+            var figura = await dbContext.Figuras.FindAsync(id);
+            dbContext.Figuras.Remove(figura);
             await dbContext.SaveChangesAsync();
             return Ok();
         }

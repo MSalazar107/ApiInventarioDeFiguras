@@ -18,6 +18,11 @@ namespace ApiInventarioDeFiguras.Controllers
         {
             return await dbContext.Waves.ToListAsync();
         }
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Wave>> GetById(int id)
+        {
+            return await dbContext.Waves.FirstOrDefaultAsync(x => x.Id == id);
+        }
 
         [HttpPost]
 
@@ -44,8 +49,8 @@ namespace ApiInventarioDeFiguras.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> Delete(int id)
         {
-            var waveDel = await dbContext.Figuras.FindAsync(id);
-            dbContext.Figuras.Remove(waveDel);
+            var wave = await dbContext.Figuras.FindAsync(id);
+            dbContext.Figuras.Remove(wave);
             await dbContext.SaveChangesAsync();
             return Ok();
         }
